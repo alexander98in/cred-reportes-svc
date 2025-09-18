@@ -1,0 +1,54 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: "cleanArchitecture"
+  devtools:
+    add-properties: false
+  h2:
+    console:
+      enabled: true
+      path: "/h2"
+  profiles:
+    include: null
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,prometheus"
+  endpoint:
+    health:
+      probes:
+        enabled: true
+cors:
+  allowed-origins: "http://localhost:4200,http://localhost:8080"
+
+security:
+  jwt:
+    secret: ${JWT_SECRET:CHANGE_ME_IN_DEV}
+    ttl-seconds: 3600
+
+aws:
+  access-key: ${AWS_ACCESS_KEY_ID:dummy}
+  secret-key: ${AWS_SECRET_ACCESS_KEY:dummy}
+  region: ${AWS_REGION:us-east-1}
+  dynamodb:
+    endpoint: "http://localhost:8000"
+  sqs:
+    report-queue:
+      url: ${AWS_SQS_QUEUE_REPORT_URL:dummy}
+      is-fifo: true
+
+app:
+  dynamodb:
+    table:
+      reporteAprobados: ${DYNAMO_TABLE_REPORTE_APROBADOS:reporte_aprobados}
+
+sqs:
+  incoming:
+    poll-interval-ms: 5000
+    max-messages: 10
+    wait-seconds: 10
+    visibility-timeout: 30
+    fifo:
+      max-concurrent-groups: 4
