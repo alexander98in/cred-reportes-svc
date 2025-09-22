@@ -33,7 +33,7 @@ public class RouterRestDocs {
                             operationId = "generateReport",
                             tags = { "Reportes" },
                             summary = "Generar reporte",
-                            description = "Genera un reporte basado en los préstamos aprobados",
+                            description = "Genera un reporte basado en los prestamos aprobados",
                             responses = @ApiResponse(
                                     responseCode = "200",
                                     description = "Reporte generado exitosamente",

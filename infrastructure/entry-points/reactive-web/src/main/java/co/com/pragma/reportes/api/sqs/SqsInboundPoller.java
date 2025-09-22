@@ -95,7 +95,7 @@ public class SqsInboundPoller {
         }
     }
 
-    /** Body esperado: {"idApplication":"<uuid>","estado":"Aprobada|Rechazada|Pendiente de revisión"} */
+    /** Body esperado: {"idApplication":"<uuid>","estado":"Aprobada|Rechazada|Pendiente de revision"} */
     @Data
     public static class ReportMessage {
         private UUID idApplication;

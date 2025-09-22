@@ -1,14 +1,14 @@
 server:
-  port: 8082
+  port: ${SERVER_PORT_REP:8082}
 spring:
   application:
-    name: "cleanArchitecture"
+    name: ${APP_NAME_REP:cleanArchitecture}
   devtools:
     add-properties: false
   h2:
     console:
-      enabled: true
-      path: "/h2"
+      enabled: ${H2_CONSOLE_ENABLED:false}
+      path: ${H2_CONSOLE_PATH:/h2}
   profiles:
     include: null
 management:
@@ -21,19 +21,19 @@ management:
       probes:
         enabled: true
 cors:
-  allowed-origins: "http://localhost:4200,http://localhost:8080"
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:4200,http://localhost:8080}
 
 security:
   jwt:
     secret: ${JWT_SECRET:CHANGE_ME_IN_DEV}
-    ttl-seconds: 3600
+    ttl-seconds: ${JWT_TTL_SECONDS:3600}
 
 aws:
   access-key: ${AWS_ACCESS_KEY_ID:dummy}
   secret-key: ${AWS_SECRET_ACCESS_KEY:dummy}
   region: ${AWS_REGION:us-east-1}
   dynamodb:
-    endpoint: "http://localhost:8000"
+    endpoint: ${AWS_DYNAMODB_ENDPOINT:}
   sqs:
     report-queue:
       url: ${AWS_SQS_QUEUE_REPORT_URL:dummy}
@@ -46,9 +46,9 @@ app:
 
 sqs:
   incoming:
-    poll-interval-ms: 5000
-    max-messages: 10
-    wait-seconds: 10
-    visibility-timeout: 30
+    poll-interval-ms: ${SQS_INCOMING_POLL_INTERVAL_MS:5000}
+    max-messages: ${SQS_INCOMING_MAX_MESSAGES:10}
+    wait-seconds: ${SQS_INCOMING_WAIT_SECONDS:10}
+    visibility-timeout: ${SQS_INCOMING_VISIBILITY_TIMEOUT:30}
     fifo:
-      max-concurrent-groups: 4
+      max-concurrent-groups: ${SQS_INCOMING_FIFO_MAX_CONCURRENT_GROUPS:4}

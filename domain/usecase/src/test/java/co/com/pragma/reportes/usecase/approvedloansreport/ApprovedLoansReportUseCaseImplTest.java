@@ -52,7 +52,7 @@ public class ApprovedLoansReportUseCaseImplTest {
                 .expectNext(sampleReport)
                 .verifyComplete();
 
-        // Verifica que se llamó con los valores esperados
+        // Verifica que se llamo con los valores esperados
         verify(repository).getApprovedLoansReport(eq("APROBADA"), eq("TOTAL"));
     }
 

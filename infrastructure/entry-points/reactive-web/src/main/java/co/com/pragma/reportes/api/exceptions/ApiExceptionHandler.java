@@ -40,12 +40,12 @@ public class ApiExceptionHandler implements ErrorWebExceptionHandler {
         var status = pair.httpStatus();
         var body = pair.body();
 
-        // --- LOG: una línea compacta por error ---
+        // --- LOG: una linea compacta por error ---
         var req = exchange.getRequest();
         var method = req.getMethod() != null ? req.getMethod().name() : "?";
         var path = req.getURI().getPath();
         var exName = ex.getClass().getSimpleName();
-        var reqId = exchange.getLogPrefix().trim(); // ej: [efbcac04-1] si está disponible
+        var reqId = exchange.getLogPrefix().trim(); // ej: [efbcac04-1] si esta disponible
 
         if (status.is5xxServerError()) {
             // 5xx: log con stacktrace
@@ -64,7 +64,7 @@ public class ApiExceptionHandler implements ErrorWebExceptionHandler {
             var buffer = resp.bufferFactory().wrap(bytes);
             return resp.writeWith(Mono.just(buffer));
         } catch (Exception writeErr) {
-            // fallback mínimo si falla la serialización
+            // fallback minimo si falla la serializacion
             var fallback = ("{\"status\":" + status.value() + ",\"message\":\"Unexpected error\"}")
                     .getBytes(StandardCharsets.UTF_8);
             return resp.writeWith(Mono.just(resp.bufferFactory().wrap(fallback)));
@@ -87,7 +87,7 @@ public class ApiExceptionHandler implements ErrorWebExceptionHandler {
             messageGeneral = ErrorCode.VALIDATION.getMessage();
             code = ErrorCode.VALIDATION.getCode();
             details = ve.getErrors();
-            message = (message != null) ? message : "Datos inválidos";
+            message = (message != null) ? message : "Datos invalidos";
         } else if (error instanceof IllegalArgumentException) {
             httpStatus = HttpStatus.BAD_REQUEST;
             status = ErrorCode.VALIDATION.getCode();
@@ -110,7 +110,7 @@ public class ApiExceptionHandler implements ErrorWebExceptionHandler {
             status = ErrorCode.PAYLOAD_INVALID.getCode();
             messageGeneral = ErrorCode.PAYLOAD_INVALID.getMessage();
             code = ErrorCode.PAYLOAD_INVALID.getCode();
-            if (message == null) message = "JSON de entrada inválido";
+            if (message == null) message = "JSON de entrada invalido";
         } else {
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
             status = ErrorCode.SERVER_ERROR.getCode();
@@ -128,7 +128,7 @@ public class ApiExceptionHandler implements ErrorWebExceptionHandler {
                 .method(req.getMethod() != null ? req.getMethod().name() : null)
                 .data(details)
                 .build();
-        //status.is4xxClientError() ? "Solicitud inválida" : "Error interno"
+        //status.is4xxClientError() ? "Solicitud invalida" : "Error interno"
         var api = ApiResponse.of(
                 status,
                 messageGeneral,
