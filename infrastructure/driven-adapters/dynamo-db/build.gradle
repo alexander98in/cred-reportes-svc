@@ -9,4 +9,15 @@ dependencies {
 
     implementation 'org.reactivecommons.utils:object-mapper-api:0.1.0'
     testImplementation 'org.reactivecommons.utils:object-mapper:0.1.0'
+
+    // AWS SDK v2 (con BOM)
+    implementation platform("software.amazon.awssdk:bom:2.25.48")
+    implementation "software.amazon.awssdk:sqs"
+    implementation "software.amazon.awssdk:sesv2"
+    // Opcional para SQS/SES local
+    testImplementation "org.testcontainers:localstack:1.20.1"
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.17.2'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.17.2'
 }

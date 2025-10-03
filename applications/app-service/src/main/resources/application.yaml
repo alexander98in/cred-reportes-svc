@@ -38,11 +38,16 @@ aws:
     report-queue:
       url: ${AWS_SQS_QUEUE_REPORT_URL:dummy}
       is-fifo: true
+    task-queue:
+      url: ${AWS_SQS_QUEUE_TASK_URL:dummy}
 
 app:
   dynamodb:
     table:
       reporteAprobados: ${DYNAMO_TABLE_REPORTE_APROBADOS:reporte_aprobados}
+  scheduling:
+    hello-cron: "0 26 19 * * *"   # 2:45 p. m. todos los días (formato Spring: s m H d M dow)
+    zone: "America/Bogota"
 
 sqs:
   incoming:
@@ -52,3 +57,4 @@ sqs:
     visibility-timeout: ${SQS_INCOMING_VISIBILITY_TIMEOUT:30}
     fifo:
       max-concurrent-groups: ${SQS_INCOMING_FIFO_MAX_CONCURRENT_GROUPS:4}
+

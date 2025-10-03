@@ -10,4 +10,6 @@ public interface ApprovedLoansReportUseCase {
     Mono<ApprovedLoansReport> getTotalApprovedLoansReport();
 
     Mono<Void> addApprovedLoan(Long inc, BigDecimal amount);
+
+    Mono<Void> sendApprovedLoanReport();
 }
