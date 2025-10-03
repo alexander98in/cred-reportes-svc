@@ -43,8 +43,9 @@ public class SecurityConfig {
                 .authorizeExchange(ex -> ex
                         // CORS preflight
                         .pathMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .pathMatchers("/actuator/**").permitAll()
                         // Publicos (ej. docs)
-                        .pathMatchers("/actuator/**", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                        .pathMatchers( "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         // Listar solicitudes: ADMIN y ASESOR
                         .pathMatchers(HttpMethod.GET, "/api/v1/reportes").hasAnyAuthority("ADMIN","ASESOR")
                         .anyExchange().authenticated()
